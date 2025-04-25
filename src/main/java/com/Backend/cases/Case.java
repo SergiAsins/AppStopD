@@ -1,13 +1,10 @@
-package java.Backend.cases;
+package com.Backend.cases;
 
-import java.Backend.status.Status;
-import java.Backend.users.User;
+import com.Backend.status.Status;
+import com.Backend.users.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-//import lombok.*;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Optional;

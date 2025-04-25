@@ -1,7 +1,7 @@
-package java.Backend.users;
+package com.Backend.users;
 
-import java.Backend.profiles.Profile;
-import java.Backend.roles.Role;
+import com.Backend.profiles.Profile;
+import com.Backend.roles.Role;
 
 import java.util.Set;
 import jakarta.persistence.CascadeType;

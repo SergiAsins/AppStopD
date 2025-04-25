@@ -1,6 +1,6 @@
-package java.Backend.roles;
+package com.Backend.roles;
 
-import java.Backend.users.User;
+import com.Backend.users.User;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

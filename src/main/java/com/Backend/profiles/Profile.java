@@ -1,6 +1,6 @@
-package java.Backend.profiles;
+package com.Backend.profiles;
 
-import java.Backend.users.User;
+import com.Backend.users.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +24,7 @@ public class Profile {
     private String address;
     private String picture;
 
-    @OneToOne(mappedBy = "profile")
+    @OneToOne
     @JoinColumn(name = "user_id", nullable = true) // referencedColumnName = "id_user"
     private User user;
 
