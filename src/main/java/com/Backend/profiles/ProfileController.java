@@ -23,12 +23,11 @@ public class ProfileController {
         this.profileRepository = profileRepository;
     }
 
-    /*@PostMapping
-    public ResponseEntity<ProfileResponseDTO> createProfile(@RequestBody @Valid ProfileRequestDTO profileRequestDTO) {
-        User user = profileServices.findById(profileRequestDTO.userId());
-                ProfileResponseDTO profileResponseDTO = (ProfileResponseDTO) profileServices.createProfile(profileRequestDTO, user);
+    @PostMapping
+    public ResponseEntity<ProfileResponseDTO> createProfile(@RequestBody @Valid ProfileRequestDTO profileRequestDTO){
+        ProfileResponseDTO profileResponseDTO = (ProfileResponseDTO) profileServices.createProfile(profileRequestDTO);
         return new ResponseEntity<>(profileResponseDTO, HttpStatus.CREATED);
-    }*/
+    }
 
     @GetMapping("/{email}")
     public List<ProfileResponseDTO> getProfileByIdOrEmail(@PathVariable String email){
@@ -43,6 +42,12 @@ public class ProfileController {
     @PutMapping("/{id}")
     public ResponseEntity<ProfileResponseDTO> updateProfile(@PathVariable Long id, @RequestBody @Valid ProfileRequestDTO profileRequestDTO){
         ProfileResponseDTO profileResponseDTO = profileServices.findById((id));
+        return new ResponseEntity<>(profileResponseDTO, HttpStatus.OK);
+    }
+
+    @PutMapping("/modify")
+    ResponseEntity<ProfileResponseDTO> modifyProfile(@RequestBody @Valid ProfileRequestDTO profileRequestDTO){
+        ProfileResponseDTO profileResponseDTO = (ProfileResponseDTO) profileServices.modifyProfile(profileRequestDTO);
         return new ResponseEntity<>(profileResponseDTO, HttpStatus.OK);
     }
 }

@@ -34,7 +34,7 @@ import java.util.Collection;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-    @Value("${api-endpoint")
+    @Value("${api-endpoint}")
     String endpoint;
 
     private final JpaUserDetailsService jpaUserDetailsService;
@@ -53,23 +53,27 @@ public class SecurityConfiguration {
                         .logoutUrl(endpoint + "/logout")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID"))
-                        .authorizeHttpRequests(auth ->auth
-                                .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**")).permitAll()
-                                .requestMatchers(endpoint).permitAll()
-                                .requestMatchers(HttpMethod.POST, endpoint + "/register").permitAll()
-                                .requestMatchers(endpoint + "login").hasAnyRole("USER", "ADMIN")
-                                //user paths:
-                                .requestMatchers(HttpMethod.PUT, endpoint + "/users/my-user").hasAnyRole("USER", "ADMIN")
-                                .requestMatchers(HttpMethod.POST, endpoint + "/users").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.GET, endpoint + "/users/{username}").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.DELETE, endpoint + "/users/{id}").hasRole("ADMIN")
+                .authorizeHttpRequests(auth ->auth
+                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**")).permitAll()
+                        .requestMatchers(endpoint).permitAll()
+                        .requestMatchers(HttpMethod.POST, endpoint + "/register").permitAll()
+                        .requestMatchers(endpoint + "login").hasAnyRole("USER", "ADMIN")
+                        //user paths:
+                        .requestMatchers(HttpMethod.PUT, endpoint + "/users/my-user").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, endpoint + "/users").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, endpoint + "/users/{username}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, endpoint + "/users/{id}").hasRole("ADMIN")
 
-                                //add Case routes
-                                .anyRequest().authenticated())
-                                .userDetailsService(jpaUserDetailsService)
-                                .httpBasic(withDefaults())
-                                .sessionManagement(session -> session
-                                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS));
+                        //add Case routes
+                        .anyRequest().authenticated())
+                .userDetailsService(jpaUserDetailsService)
+                .httpBasic(withDefaults())
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS));
+
+        // Enables access to the H2 console
+        http.headers(header -> header.frameOptions(frame -> frame.sameOrigin()));
 
         //23.1.25: Amr
         http.addFilterBefore((request, response, chain) -> {
