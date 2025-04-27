@@ -64,9 +64,14 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.PUT, endpoint + "/users/my-user").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.POST, endpoint + "/users").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, endpoint + "/users/{username}").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, endpoint + "/users/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, endpoint + "/users").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, endpoint + "/profiles").hasAnyRole("USER", "ADMIN")
 
+                        //profile paths:
+                        .requestMatchers(HttpMethod.POST, endpoint + "/profiles").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, endpoint + "/profiles/modify").hasAnyRole("USER", "ADMIN")
                         //add Case routes
+
                         .anyRequest().authenticated())
                 .userDetailsService(jpaUserDetailsService)
                 .httpBasic(withDefaults())

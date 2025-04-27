@@ -2,6 +2,8 @@ package com.Backend.users;
 
 import com.Backend.exceptions.general.AppNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 import java.util.Optional;
@@ -66,12 +68,17 @@ public class UserService {
         throw new AppNotFoundException("The user with id " + id + " was not found.");
     }
 
-    public void deleteUserById(Long id){
-        Optional<User> optionalUser = userRepository.findById(id);
+    public void deleteUserById(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
 
+        //Search the authenticated user in the DB
+        Optional<User> optionalUser = userRepository.findByUsername(username);
         if(optionalUser.isEmpty()){
-            throw new AppNotFoundException("The user with the id" + id + "was not found.");
+            throw new AppNotFoundException("The user with the id" + optionalUser.get().getId() + "was not found.");
         }
-        userRepository.deleteById(id);
+
+        // Erase the user (and its linked profile thanks to CascadeType.ALL)
+        userRepository.deleteById(optionalUser.get().getId());
     }
 }

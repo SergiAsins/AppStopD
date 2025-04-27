@@ -35,11 +35,12 @@ public class ProfileServices {
         }
         User authenticatedUser = userOptional.get();
 
-        //verify email
+        //Verify email
         Optional<Profile> existsProfile = profileRepository.findByEmail(profileRequestDTO.email());
         if (existsProfile.isPresent())
             throw new AppAlreadyExistsException("Profile already exists with this email.");
 
+        //Creates and save the profile
         Profile profile = ProfileMapper.toEntity(profileRequestDTO, authenticatedUser);
         Profile savedProfile = profileRepository.save(profile);
         return ProfileMapper.toResponse(savedProfile);
@@ -113,5 +114,23 @@ public class ProfileServices {
                 .map(ProfileMapper::toResponse)
                 .toList();
     }
+
+    /*public void deleteProfileById() throws AppUserNotFoundException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        Optional<User> userOptional = userRepository.findByUsername(username);
+        if(userOptional.isEmpty()){
+            throw new AppNotFoundException("Authenticated user not found in the database.");
+        }
+        User authenticatedUser = userOptional.get();
+
+        Optional<Profile> optionalProfile = profileRepository.findByUserId(authenticatedUser.getId());
+        if (optionalProfile.isEmpty()) {
+            throw new AppUserNotFoundException("No profile found for the authenticated user.");
+        }
+
+        profileRepository.deleteById(optionalProfile.get().getId());
+    }*/
 }
 

@@ -47,4 +47,10 @@ public class ProfileController {
         ProfileResponseDTO profileResponseDTO = (ProfileResponseDTO) profileServices.modifyProfile(profileRequestDTO);
         return new ResponseEntity<>(profileResponseDTO, HttpStatus.OK);
     }
+
+    @DeleteMapping()
+    public ResponseEntity<String> deleteProfile() {
+        profileServices.deleteProfileById();
+        return new ResponseEntity<>("The Profile has been eliminated successfully", HttpStatus.OK);
+    }
 }
