@@ -5,7 +5,7 @@ import jakarta.validation.constraints.*;
 
 public record UserRequestDTO (
 
-        //Role role,
+        Role role,
 
         @NotNull(message = "Username cannot be null")
         @NotEmpty(message = "Username cannot be empty")

@@ -1,8 +1,7 @@
 package com.Backend.users;
 
+import com.Backend.exceptions.general.AppNotFoundException;
 import org.springframework.stereotype.Service;
-
-import com.Backend.exceptions.AppNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -56,9 +55,11 @@ public class UserService {
 
         if(optionalUser.isPresent()){
             User user = optionalUser.get();
+
+            user.setRoles(Set.of(userRequestDTO.role()));
             user.setUsername(userRequestDTO.username());
             user.setPassword(userRequestDTO.password());
-            //user.setRoles(Set.of(userRequestDTO.role()));
+
             User updatedUser = userRepository.save(user);
             return UserMapper.toResponseDTO(updatedUser);
         }

@@ -7,16 +7,14 @@ public class UserMapper {
         User user = new User();
         user.setUsername(userRequestDTO.username());
         user.setPassword(userRequestDTO.password());
-        //user.setRoles(Set.of(userRequestDTO.role()));
+        user.setRoles(Set.of(userRequestDTO.role()));
         return user;
     }
 
     public static UserResponseDTO toResponseDTO(User user){
         return new UserResponseDTO(
                 user.getId(),
-                //user.getRoles(),
-                user.getUsername(),
-                user.getPassword()
-        );
+                user.getRoles(),
+                user.getUsername());
     }
 }

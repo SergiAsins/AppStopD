@@ -20,7 +20,7 @@ public class RolesService {
 
     public Set<Role> assignDefaultRole(Long userId) throws RoleNotFoundException{
 
-        Role defaultRole=roleRepository.findByName("Role_USER").orElseThrow(() -> new RoleNotFoundException("Default role (Role_USER) not found"));
+        Role defaultRole=roleRepository.findByName("ROLE_USER").orElseThrow(() -> new RoleNotFoundException("Default role (Role_USER) not found"));
 
         return Collections.singleton(defaultRole);
     }

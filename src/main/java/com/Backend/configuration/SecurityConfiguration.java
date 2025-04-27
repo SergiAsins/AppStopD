@@ -47,7 +47,7 @@ public class SecurityConfiguration {
     public DefaultSecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.cors(withDefaults())
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.disable()) // Disable CSRF for APIs REST
                 .formLogin(form -> form.disable())
                 .logout(out -> out
                         .logoutUrl(endpoint + "/logout")
@@ -57,6 +57,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**")).permitAll()
                         .requestMatchers(endpoint).permitAll()
+                        //register
                         .requestMatchers(HttpMethod.POST, endpoint + "/register").permitAll()
                         .requestMatchers(endpoint + "login").hasAnyRole("USER", "ADMIN")
                         //user paths:

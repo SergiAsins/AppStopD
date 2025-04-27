@@ -1,4 +1,4 @@
-package com.Backend.exceptions;
+package com.Backend.exceptions.general;
 
 import com.Backend.exceptions.runtime.AppRuntimeException;
 

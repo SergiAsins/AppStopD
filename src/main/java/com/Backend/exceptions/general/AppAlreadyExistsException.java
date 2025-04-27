@@ -1,6 +1,4 @@
-package com.Backend.exceptions;
-
-import com.Backend.exceptions.runtime.AppRuntimeException;
+package com.Backend.exceptions.general;
 
 public class AppAlreadyExistsException extends RuntimeException {
     public AppAlreadyExistsException(String message) {

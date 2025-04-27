@@ -6,8 +6,8 @@ import com.Backend.users.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import com.Backend.exceptions.AppNotFoundException;
-import com.Backend.exceptions.AppAlreadyExistsException;
+import com.Backend.exceptions.general.AppNotFoundException;
+import com.Backend.exceptions.general.AppAlreadyExistsException;
 
 import java.util.List;
 import java.util.Optional;

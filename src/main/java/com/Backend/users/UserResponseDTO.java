@@ -6,8 +6,7 @@ import java.util.Set;
 
 public record UserResponseDTO(
         Long id,
-        //Set<Role> roles,
-        String name,
-        String password
+        Set<Role> roles,
+        String name
 ){
 }
