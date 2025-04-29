@@ -1,15 +1,17 @@
 package com.Backend.cases;
 
-import com.Backend.status.Status;
+import com.Backend.cases.status.Status;
 import com.Backend.users.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+@Entity
+@Table(name = "cases")
 public class Case {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +19,7 @@ public class Case {
     private Long id;
 
     @NotNull(message = "The status cannot be null")
-    private Status status; // Enum: PENDING, IN_PROGRESS, RESOLVED
+    private Status status;
 
     @NotNull(message = "The address cannot be null")
     private String address;
@@ -30,8 +32,8 @@ public class Case {
 
     @NotNull(message = "The Date cannot be null")
     @Future(message = "A Eviction Case must be noticed in advance.")
-    @Column(name = "eviction_time", nullable = false)
-    private Timestamp dateReported;
+    @Column(name = "case_date", nullable = false)
+    private LocalDate caseDate;
 
     @ManyToMany
     @JoinTable(
@@ -39,28 +41,37 @@ public class Case {
             joinColumns = @JoinColumn(name = "case_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    @Column(name = "tenant", nullable = false)
     private Set<User> tenants;
+
+    @ManyToMany
+    @JoinTable(
+            name = "case_attendants",
+            joinColumns = @JoinColumn(name = "case_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<User> attendants = new HashSet<>(); //AI: Initialize to avoid NullPointerException
 
     private String description;
 
+    // Default Constructor
     public Case(){
     }
 
     // Complete Constructor
-    public Case(Status status, String address, String region, String city, Timestamp dateReported, Set<User> tenants, String description) {
+    public Case(Status status, String address, String region, String city, LocalDate caseDate, Set<User> tenants, Set<User> attendants, String description) {
         this.status = status;
         this.address = address;
         this.region = region;
         this.city = city;
-        this.dateReported = dateReported;
+        this.caseDate = caseDate;
         this.tenants = tenants;
+        this.attendants = attendants;
         this.description = description;
     }
 
     // Simplified Constructor
-    public Case(Status status,  String address, String region, String city, Timestamp dateReported, String description) {
-        this(status, address, region, city, dateReported, new HashSet<>(), description);
+    public Case(Status status, String address, String region, String city, LocalDate caseDate, String description) {
+        this(status, address, region, city, caseDate, new HashSet<>(), new HashSet<>(), description);
     }
 
     public Case (Optional <Case> byId){
@@ -69,7 +80,6 @@ public class Case {
     public Long getId() {
         return id;
     }
-
 
     public @NotNull(message = "The status cannot be null") Status getStatus() {
         return status;
@@ -87,8 +97,32 @@ public class Case {
         return city;
     }
 
-    public @NotNull(message = "The Date cannot be null") @Future(message = "A Eviction Case must be noticed in advance.") Timestamp getDateReported() {
-        return dateReported;
+    public @NotNull(message = "The Date cannot be null") @Future(message = "A Eviction Case must be noticed in advance.") LocalDate getCaseDate() {
+        return caseDate;
+    }
+
+    public Set<User> getAttendants() {
+        return attendants;
+    }
+
+    public void setAttendants(Set<User> attendants) {
+        this.attendants = attendants;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Set<User> getTenants() {
+        return tenants;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setTenants(Set<User> tenants) {
+        this.tenants = tenants;
     }
 
     public Set<User> getTenant() {
@@ -115,8 +149,8 @@ public class Case {
         this.city = city;
     }
 
-    public void setDateReported(@NotNull(message = "The Date cannot be null") @Future(message = "A Eviction Case must be noticed in advance.") Timestamp dateReported) {
-        this.dateReported = dateReported;
+    public void setCaseDate(@NotNull(message = "The Date cannot be null") @Future(message = "A Eviction Case must be noticed in advance.") LocalDate caseDate) {
+        this.caseDate = caseDate;
     }
 
 }
