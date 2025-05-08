@@ -11,5 +11,4 @@ public class StopDApplication {
 		SpringApplication.run(StopDApplication.class, args);
 		System.out.println("Welcome to StopD");
 	}
-
 }

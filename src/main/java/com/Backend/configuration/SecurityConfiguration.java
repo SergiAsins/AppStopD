@@ -47,6 +47,7 @@ public class SecurityConfiguration {
     public DefaultSecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.cors(withDefaults())
+                .cors(withDefaults()) // Enables our cors configuration
                 .csrf(csrf -> csrf.disable()) // Disable CSRF for APIs REST
                 .formLogin(form -> form.disable())
                 .logout(out -> out

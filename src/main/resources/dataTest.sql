@@ -32,7 +32,3 @@ VALUES (0, 'Minas Tirith, Second Flor, door number 8', 'Gondor', 'Gondor', '2025
 
 INSERT INTO cases (status, address, region, city, case_date, description)
 VALUES (0, 'La Caseta Del Pocholo de l"Albufera', 'La Ribera Guerrillera', 'País Valencià', '2025-07-20', 'Pocholo is in a situation of Eviction express - Santander Bank is gonna take the Pocholo''s place');
-
-/* Assign tenants */
-INSERT INTO case_tenants (case_id, user_id) VALUES (1, 1);
-INSERT INTO case_tenants (case_id, user_id) VALUES (2, 3);
