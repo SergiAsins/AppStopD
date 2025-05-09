@@ -20,7 +20,8 @@ import java.util.stream.Collectors;
                     caseRequestDTO.caseDate(),
                     tenants,
                     attendants,
-                    caseRequestDTO.description()
+                    caseRequestDTO.description(),
+                    caseRequestDTO.urlImage()
             );
         }
 
@@ -33,6 +34,7 @@ import java.util.stream.Collectors;
                 caseEntity.getCity(),
                 caseEntity.getCaseDate(),
                 caseEntity.getDescription(),
+                caseEntity.getUrlImage(),
                 caseEntity.getTenants().stream()
                         .map(UserMapper::toResponseDTO)
                         .collect(Collectors.toSet()),

@@ -33,6 +33,8 @@ public record CaseRequestDTO (
 
         String description,
 
+        String urlImage,
+
         //@NotNull(message = "The tenants cannot be null")
         //@NotEmpty(message = "The tenants cannot be empty")
         Set<User> tenants,

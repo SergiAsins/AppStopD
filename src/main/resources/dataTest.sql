@@ -27,8 +27,6 @@ INSERT INTO profiles (user_id, name, phone, email, address, picture)
 VALUES (3, 'Pocholo  White Snow', '680222339', 'pocholo@erasmusloco.ma', 'Moria Second Floor on the Left', 'ProfilePicture3');
 
 /* Cases */
-INSERT INTO cases (status, address, region, city, case_date, description)
-VALUES (0, 'Minas Tirith, Second Flor, door number 8', 'Gondor', 'Gondor', '2025-07-15', 'Johansen vs. Sauron; Sauron says the city was payed and founded just by himself');
+INSERT INTO cases (status, address, region, city, case_date, description, url_image)
+VALUES (0, 'Minas Tirith, Second Flor, door number 8', 'Gondor', 'Gondor', '2025-07-15', 'Johansen vs. Sauron', 'https://media.istockphoto.com/id/1018966346/es/foto/mujer-brasile%C3%B1a-en-su-casa-en-la-cocina-de-una-estufa-de-madera.jpg?s=1024x1024&w=is&k=20&c=s18MKyLkrd2--b4gPNEauXZJwgZcHdTn6WGH8hi_CFw=');
 
-INSERT INTO cases (status, address, region, city, case_date, description)
-VALUES (0, 'La Caseta Del Pocholo de l"Albufera', 'La Ribera Guerrillera', 'País Valencià', '2025-07-20', 'Pocholo is in a situation of Eviction express - Santander Bank is gonna take the Pocholo''s place');

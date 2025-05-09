@@ -13,6 +13,7 @@ public record CaseResponseDTO (
         String city,
         LocalDate caseDate,
         String description,
+        String urlImage,
         Set<UserResponseDTO> tenants,
         Set<UserResponseDTO> attendants
 ){

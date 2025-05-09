@@ -53,12 +53,15 @@ public class Case {
 
     private String description;
 
+    @Column(name = "url_image")
+    private String urlImage;
+
     // Default Constructor
     public Case(){
     }
 
     // Complete Constructor
-    public Case(Status status, String address, String region, String city, LocalDate caseDate, Set<User> tenants, Set<User> attendants, String description) {
+    public Case(Status status, String address, String region, String city, LocalDate caseDate, Set<User> tenants, Set<User> attendants, String description , String urlImage) {
         this.status = status;
         this.address = address;
         this.region = region;
@@ -67,11 +70,12 @@ public class Case {
         this.tenants = tenants;
         this.attendants = attendants;
         this.description = description;
+        this.urlImage = urlImage;
     }
 
     // Simplified Constructor
-    public Case(Status status, String address, String region, String city, LocalDate caseDate, String description) {
-        this(status, address, region, city, caseDate, new HashSet<>(), new HashSet<>(), description);
+    public Case(Status status, String address, String region, String city, LocalDate caseDate, String description, String urlImage) {
+        this(status, address, region, city, caseDate, new HashSet<>(), new HashSet<>(), description, urlImage);
     }
 
     public Case (Optional <Case> byId){
@@ -153,4 +157,11 @@ public class Case {
         this.caseDate = caseDate;
     }
 
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
+    }
 }
