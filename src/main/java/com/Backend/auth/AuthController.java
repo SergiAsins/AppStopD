@@ -16,15 +16,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     @GetMapping(path = "/login")
-    public ResponseEntity<Map<String, String>> login(){
+    public ResponseEntity<Map<String, String>> login(Authentication authentication){
 
-        SecurityContext contextHolder = SecurityContextHolder.getContext();
-        Authentication auth = (contextHolder).getAuthentication();
+        //SecurityContext contextHolder = SecurityContextHolder.getContext();
+        //Authentication auth = (contextHolder).getAuthentication();
 
+        /*
         Map<String, String> json = new HashMap<>();
         json.put("message", "Logged");
         json.put("username", auth.getName());
         json.put("roles", auth.getAuthorities().iterator().next().toString());
+        */
+
+        //AI:
+        Map<String, String> json = new HashMap<>();
+        json.put("message", "Logged");
+        json.put("username", authentication.getName());
+        json.put("roles", authentication.getAuthorities().iterator().next().toString());
 
         return ResponseEntity.status(HttpStatus.OK).body(json);
     }

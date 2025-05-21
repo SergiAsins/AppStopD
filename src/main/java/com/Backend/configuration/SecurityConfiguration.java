@@ -48,7 +48,7 @@ public class SecurityConfiguration {
 
         http.cors(withDefaults())
                 .cors(withDefaults()) // Enables our cors configuration
-                .csrf(csrf -> csrf.disable()) // Disable CSRF for APIs REST
+                .csrf((csrf -> csrf.disable())) // Disable CSRF for APIs REST
                 .formLogin(form -> form.disable())
                 .logout(out -> out
                         .logoutUrl(endpoint + "/logout")
@@ -60,7 +60,8 @@ public class SecurityConfiguration {
                         .requestMatchers(endpoint).permitAll()
                         //register
                         .requestMatchers(HttpMethod.POST, endpoint + "/register").permitAll()
-                        .requestMatchers(endpoint + "login").hasAnyRole("USER", "ADMIN")
+                        //.requestMatchers(endpoint + "login").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(endpoint + "/login").permitAll()
                         //user paths:
                         .requestMatchers(HttpMethod.PUT, endpoint + "/users/my-user").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.POST, endpoint + "/users").hasRole("ADMIN")
