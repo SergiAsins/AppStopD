@@ -44,4 +44,8 @@ public class Role {
     public void setId(Long id) {
         this.id = id;
     }
+
+    // Required for creating the roles within tests
+    public void setName(String roleUser) {
+    }
 }
