@@ -58,6 +58,8 @@ public class SecurityConfiguration {
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**")).permitAll()
                         .requestMatchers(endpoint).permitAll()
+                        //cases paths:
+                        .requestMatchers(HttpMethod.GET, endpoint + "/cases/**").permitAll()
                         //register
                         .requestMatchers(HttpMethod.POST, endpoint + "/register").permitAll()
                         //.requestMatchers(endpoint + "login").hasAnyRole("USER", "ADMIN")

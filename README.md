@@ -18,6 +18,7 @@ StopD is an app project for managing eviction cases and building community suppo
 - Hibernate/JPA
 - H2 Database (for development)
 - Basic Auth Security
+- AWS deployment  & Docker Containers
 
 ## How It Works
 

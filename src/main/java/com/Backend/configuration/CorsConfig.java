@@ -15,7 +15,8 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://34.205.175.94:5173");
+        config.addAllowedOrigin("https://socialstopd.click");
+        // dev local
         config.addAllowedOrigin("http://localhost:5173");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
